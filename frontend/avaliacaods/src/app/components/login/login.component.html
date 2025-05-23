@@ -1,0 +1,35 @@
+<div class = "content">
+    <div class="title-content">
+        <div class="main-title">
+            <svg class="title-icon" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="15" ry="15" fill="#000066" />
+    
+                <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="8" />
+            </svg>
+    
+            <h1>Bank</h1>
+        </div>
+        <div>
+            <h2>O BANCO QUE ENTENDE VOCÊ</h2>
+        </div>
+    </div>
+    <div class="inputs">
+        <div class="button-hint">
+            <mat-hint>CPF</mat-hint>
+        </div>
+        <mat-form-field>
+            <input matInput placeholder="Digite seu CPF" [formControl]="cpf">
+        </mat-form-field>
+        <div class="button-hint">
+            <mat-hint>Senha</mat-hint>
+        </div>
+        <mat-form-field>
+            <input matInput placeholder="Digite sua Senha" [formControl]="password">
+        </mat-form-field>
+    </div>
+    
+    <div class="buttons">
+        <button type="button" class="btn btn-primary button">Cadastrar</button>
+        <button type="button" class="btn btn-primary button">Login</button>
+    </div>
+</div>

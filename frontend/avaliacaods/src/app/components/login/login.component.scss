@@ -1,0 +1,60 @@
+.title-content {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-title {
+    display: flex;
+    flex-direction: row;
+    max-height: 8rem;
+    margin-top: 3rem;
+}
+
+h1 {
+    font-size: 6rem;
+    margin-top: 0.7rem;
+    color: #000066;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #000066;
+    margin-left: 4rem;
+}
+
+.title-icon {
+    margin: 1rem;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+mat-form-field, .button-hint {
+    width: 30rem;
+    margin-left: 4rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    width: 12rem;
+    margin-top: 1rem;
+    margin-left: 4rem;
+    background-color: #000066;
+}
+
+.content {
+    margin-right: 4rem;
+}
