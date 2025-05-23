@@ -1,0 +1,89 @@
+.content {
+    height: 70%;
+    max-width: 100%;
+    margin-top: 2.5rem;
+    margin-left: 4rem
+}
+
+
+.titles {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;;
+}
+
+.inputs {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.select {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    margin-left: 5rem;
+}
+
+mat-form-field {
+    margin-right: 2rem;
+}
+
+.field-account {
+    height: 2rem;
+    width: 55%;
+}
+
+.field-value {
+    width: 100%;
+}
+
+.value-div {
+    position: relative;
+}
+
+.value-title {
+    position: absolute;
+    top: -3rem;
+}
+
+.button {
+    height: 3rem;
+    max-width: 15.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .content {
+        margin-left: 2rem;
+    }
+
+    .select {
+        margin-top: 2rem;
+        margin-left: 2rem;
+    }
+
+    .inputs {
+        flex-direction: column;
+    }
+
+    .value-div {
+        margin-top: 3rem;
+    }
+
+    .value-title {
+        position: static;
+    }
+
+    .field-value {
+        width: 60%;
+    }
+
+    .field-account {
+        width: 80%;
+    }
+}
