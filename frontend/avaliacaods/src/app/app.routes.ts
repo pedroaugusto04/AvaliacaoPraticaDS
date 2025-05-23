@@ -3,8 +3,9 @@ import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ContasComponent } from './components/contas/contas.component';
 import { SaqueComponent } from './components/saque/saque.component';
-import { DepositoComponent } from './component/deposito/deposito.component';
+import { DepositoComponent } from './components/deposito/deposito.component';
 import { ExtratoComponent } from './components/extrato/extrato.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path: 'conta',component: ContasComponent},
     {path: 'saque',component: SaqueComponent},
     {path: 'deposito',component: DepositoComponent},
-    {path: 'extrato',component: ExtratoComponent}
+    {path: 'extrato',component: ExtratoComponent},
+    {path: 'cliente',component: ClienteComponent}
 ];

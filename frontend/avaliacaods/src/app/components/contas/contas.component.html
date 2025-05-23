@@ -2,7 +2,7 @@
 <div class="content">
     <div class="table-title">
         <h2>Contas</h2>
-        <button type="button" class="btn btn-primary button">Criar nova conta</button>
+        <button (click)="goToRegister()" type="button" class="btn btn-primary button">Criar nova conta</button>
     </div>
     <div class="table">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
