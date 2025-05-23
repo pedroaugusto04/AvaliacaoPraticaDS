@@ -1,0 +1,43 @@
+.content {
+    height: 70%;
+    max-width: 100%;
+    margin-top: 2.5rem;
+    margin-left: 4rem
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+}
+
+.table-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+button {
+    margin-right: 6rem;
+}
+
+.mat-column-numeroConta {
+    width: 90% !important;
+}
+
+.mat-column-saldo {
+    width: 10% !important;
+}
+
+@media (max-width: 480px) {
+    .content {
+        margin-left: 2rem;
+    }
+
+    .table-title {
+        flex-direction: column;
+        margin-right: 0;
+    }
+}
