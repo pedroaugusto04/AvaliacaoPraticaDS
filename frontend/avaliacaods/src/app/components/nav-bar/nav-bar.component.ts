@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { ConfirmService } from '../../services/confirm/confirm.service';
 import { User } from '../../models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,7 +14,7 @@ export class NavBarComponent implements OnInit {
 
   user!: User;
 
-  constructor(private userService: UserService, private confirmService: ConfirmService) {}
+  constructor(private userService: UserService, private confirmService: ConfirmService, private router: Router) {}
   
   ngOnInit() {
     this.userService.getUserLoggedIn().subscribe({
@@ -24,5 +25,9 @@ export class NavBarComponent implements OnInit {
         this.confirmService.error("Erro ao recuperar informações do usuário", "");
       }
     })
+  }
+
+  goToHome() {
+    this.router.navigate(['/menu']);
   }
 }

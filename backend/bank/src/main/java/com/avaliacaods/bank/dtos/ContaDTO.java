@@ -18,7 +18,15 @@ public class ContaDTO {
         this.numero = conta.getNumero();
         
         // soma o saldo de todos os lancamentos pra ver o estado atual da conta
-        this.saldo = conta.getLancamentos().stream().map((lancamento) -> lancamento.getValor()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        this.saldo = conta.getLancamentos().stream()
+        .map(lancamento -> {
+            return switch (lancamento.getTipo()) {
+                case CREDITO -> lancamento.getValor();
+                case DEBITO -> lancamento.getValor().negate(); // subtrai caso encontre uma operacao de saque
+                default -> BigDecimal.ZERO;
+            }; 
+        })
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 

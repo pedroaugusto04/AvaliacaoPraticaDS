@@ -1,6 +1,7 @@
 package com.avaliacaods.bank.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,6 @@ public interface AccountsRepository extends JpaRepository<Conta,Integer>{
     List<Conta> findByClienteUserId(Long userId);
 
     boolean existsByNumero(String numero);
+
+    Optional<Conta> findByNumero(String numero);
 }

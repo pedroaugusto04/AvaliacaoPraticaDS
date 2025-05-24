@@ -35,7 +35,7 @@ export class ConfirmService {
       text,
       icon: 'success',
       showConfirmButton: false,  
-      timer: 1500,            
+      timer: 1000,            
       timerProgressBar: true     
     });
   }
@@ -56,6 +56,17 @@ export class ConfirmService {
       showConfirmButton: false,  
       timer: 1500,            
       timerProgressBar: true    
+    });
+  }
+
+  warningAutoClose(title: string, text: string) {
+    return this.swalWithBootstrapButtons.fire({
+      title,
+      text,
+      icon: 'warning',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true
     });
   }
 }

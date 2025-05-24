@@ -18,12 +18,11 @@ import { Account } from '../../models/Account';
 export class ContasComponent implements OnInit{
 
   
-
-  constructor(private router: Router, private accountService: AccountService, private confirmService: ConfirmService) {}
-
   displayedColumns: string[] = ['numeroConta','saldo'];
   dataSource: any;
   accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
+
+  constructor(private router: Router, private accountService: AccountService, private confirmService: ConfirmService) {}
 
   ngOnInit(): void {
       this.accountService.getUserAccounts().subscribe({
@@ -33,7 +32,7 @@ export class ContasComponent implements OnInit{
           this.dataSource = this.accounts$;
         },
         error: () => {
-
+          this.confirmService.error("Erro ao recuperar contas do usuário","");
         }
       })
   }

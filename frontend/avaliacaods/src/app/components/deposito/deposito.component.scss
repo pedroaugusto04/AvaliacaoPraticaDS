@@ -13,6 +13,16 @@
     justify-content: space-between;;
 }
 
+.account-inputs {
+    width: 50%;
+    margin-right: 5rem;
+}
+
+.account-inputs mat-form-field{
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
 .inputs {
     width: 95%;
     display: flex;

@@ -5,5 +5,8 @@ export const environment = {
     apiLoginUserUrl: '/users/login',
     apiGetUserAccountsUrl: '/accounts',
     apiCreateUserAccountUrl: '/accounts',
-    apiUrlUserInfo: '/users/me'
+    apiUrlUserInfo: '/users/me',
+    apiDepositUrl: '/deposits',
+    apiWithdrawalUrl: '/withdrawals',
+    apiGetUserBankStatementUrl: '/bankstatements'
 };

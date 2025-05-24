@@ -1,7 +1,11 @@
 package com.avaliacaods.bank.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.avaliacaods.bank.dtos.LancamentoDTO;
 import com.avaliacaods.bank.models.enums.TipoLancamento;
 
 import jakarta.persistence.Column;
@@ -14,13 +18,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="tbLancamento")
+@Table(name = "tbLancamento")
 public class Lancamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Column(name = "data", updatable = false)
+    @CreationTimestamp
+    private LocalDateTime data;
+
     @Column(precision = 10, scale = 2)
     private BigDecimal valor;
 
@@ -29,6 +37,18 @@ public class Lancamento {
     private Conta conta;
 
     private TipoLancamento tipo;
+
+    Lancamento() {
+    }
+
+    public Lancamento(LancamentoDTO lancamentoDTO, Conta conta) {
+
+        BigDecimal valorConta = new BigDecimal(lancamentoDTO.getValor());
+
+        this.setConta(conta);
+        this.setValor(valorConta);
+        this.setTipo(lancamentoDTO.getTipoLancamento());
+    }
 
     public Long getId() {
         return id;
@@ -45,8 +65,6 @@ public class Lancamento {
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-    
-
 
     public Conta getConta() {
         return conta;
@@ -62,6 +80,14 @@ public class Lancamento {
 
     public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
     }
 
 }
