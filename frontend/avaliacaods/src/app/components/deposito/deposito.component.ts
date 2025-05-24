@@ -69,6 +69,11 @@ export class DepositoComponent implements OnInit{
     if (!this.selectedAccount || !this.valor.value) {
       this.confirmService.errorAutoClose("Informações inválidas","Tanto a conta quanto o valor devem estar preenchidos");
       return;
+    } 
+
+    if (this.valor.value == "0") {
+      this.confirmService.errorAutoClose("Informações inválidas","Não é possível realizar um depósito com valor 0");
+      return;
     }
     
     const deposit: Deposit = {

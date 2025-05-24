@@ -3,6 +3,7 @@ package com.avaliacaods.bank.models;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.avaliacaods.bank.dtos.LancamentoDTO;
@@ -30,6 +31,7 @@ public class Lancamento {
     private LocalDateTime data;
 
     @Column(precision = 10, scale = 2)
+    @Check(constraints = "valor > 0") // garante positividade
     private BigDecimal valor;
 
     @ManyToOne
