@@ -25,7 +25,7 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping("/info")   
+    @GetMapping("/me")   
     public ResponseEntity<UserResponseDTO> getUserInfo() {
 
         UserResponseDTO userResponseDTO = this.userService.getUserInfo();

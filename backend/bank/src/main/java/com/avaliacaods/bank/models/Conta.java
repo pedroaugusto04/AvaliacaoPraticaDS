@@ -32,6 +32,13 @@ public class Conta {
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Lancamento> lancamentos = new HashSet<>();
 
+    Conta() {}
+
+    public Conta(Client cliente, String numeroConta){
+        this.setCliente(cliente);
+        this.setNumero(numeroConta);
+    }
+
     public Long getId() {
         return id;
     }

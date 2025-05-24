@@ -15,9 +15,15 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
 
-   getAccounts(): Observable<Account[]> {
-      const getUserAccountsUrl = new URL(environment.apiGetUserAccountsUrl, environment.baseUrl).toString();
-  
-      return this.httpClient.get<Account[]>(getUserAccountsUrl, {headers:this.headers});
-    }
+  getUserAccounts(): Observable<Account[]> {
+    const getUserAccountsUrl = new URL(environment.apiGetUserAccountsUrl, environment.baseUrl).toString();
+
+    return this.httpClient.get<Account[]>(getUserAccountsUrl, { headers: this.headers });
+  }
+
+  createAccount(): Observable<Account> {
+    const createUserAccountsUrl = new URL(environment.apiCreateUserAccountUrl, environment.baseUrl).toString();
+
+    return this.httpClient.post<Account>(createUserAccountsUrl, { headers: this.headers });
+  }
 }

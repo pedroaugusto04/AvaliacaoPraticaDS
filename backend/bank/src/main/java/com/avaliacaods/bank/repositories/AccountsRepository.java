@@ -10,4 +10,6 @@ import com.avaliacaods.bank.models.Conta;
 @Repository
 public interface AccountsRepository extends JpaRepository<Conta,Integer>{
     List<Conta> findByClienteUserId(Long userId);
+
+    boolean existsByNumero(String numero);
 }

@@ -1,11 +1,14 @@
 package com.avaliacaods.bank.dtos;
 
+import java.math.BigDecimal;
+
 import com.avaliacaods.bank.models.Conta;
 
 public class ContaDTO {
+    
     private Long id;
     private String numero;
-    private String cpf;
+    private BigDecimal saldo;
 
 
     public ContaDTO() {}
@@ -13,8 +16,11 @@ public class ContaDTO {
     public ContaDTO(Conta conta){
         this.id = conta.getId();
         this.numero = conta.getNumero();
-        this.cpf = conta.getCliente().getUser().getCpf();
+        
+        // soma o saldo de todos os lancamentos pra ver o estado atual da conta
+        this.saldo = conta.getLancamentos().stream().map((lancamento) -> lancamento.getValor()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
 
     public Long getId() {
         return id;
@@ -32,11 +38,11 @@ public class ContaDTO {
         this.numero = numero;
     }
 
-    public String getCpf() {
-        return cpf;
+    public BigDecimal getSaldo() {
+        return saldo;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 }

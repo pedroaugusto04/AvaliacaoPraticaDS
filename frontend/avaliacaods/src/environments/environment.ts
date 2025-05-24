@@ -4,5 +4,6 @@ export const environment = {
     apiRegisterUserUrl: '/users/register',
     apiLoginUserUrl: '/users/login',
     apiGetUserAccountsUrl: '/accounts',
-    apiUrlUserInfo: '/users/info'
+    apiCreateUserAccountUrl: '/accounts',
+    apiUrlUserInfo: '/users/me'
 };

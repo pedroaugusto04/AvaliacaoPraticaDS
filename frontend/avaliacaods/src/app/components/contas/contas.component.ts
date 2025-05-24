@@ -3,6 +3,9 @@ import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import {MatTableModule} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account/account.service';
+import { ConfirmService } from '../../services/confirm/confirm.service';
+import { BehaviorSubject } from 'rxjs';
+import { Account } from '../../models/Account';
 
 @Component({
   selector: 'app-contas',
@@ -14,24 +17,20 @@ import { AccountService } from '../../services/account/account.service';
 
 export class ContasComponent implements OnInit{
 
-  constructor(private router: Router, private accountService: AccountService) {}
   
-  TABLE_DATA: any[] = [
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-    {numeroConta: 'M13-2ZSDA', saldo: 1000},
-  ];
+
+  constructor(private router: Router, private accountService: AccountService, private confirmService: ConfirmService) {}
 
   displayedColumns: string[] = ['numeroConta','saldo'];
-  dataSource = this.TABLE_DATA;
+  dataSource: any;
+  accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
   ngOnInit(): void {
-      this.accountService.getAccounts().subscribe({
+      this.accountService.getUserAccounts().subscribe({
         next:(accounts) => {
-          console.log(accounts);
+          this.accounts$.next(accounts);
+          
+          this.dataSource = this.accounts$;
         },
         error: () => {
 
@@ -39,7 +38,22 @@ export class ContasComponent implements OnInit{
       })
   }
 
-  goToRegister() {
-    this.router.navigate(['/cliente'])
+  createAccount() {
+    this.accountService.createAccount().subscribe({
+      next:(createdAccount: Account) => {
+
+        const accounts = this.accounts$.getValue();
+
+        accounts.push(createdAccount);
+
+        this.accounts$.next(accounts);
+        
+        this.confirmService.successAutoClose("Nova conta criada com sucesso!","");
+
+      },
+      error:(e) => {
+        this.confirmService.error("Erro ao criar uma nova conta.","");
+      }
+    });
   }
 }

@@ -1,13 +1,16 @@
 package com.avaliacaods.bank.controllers;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.avaliacaods.bank.models.Conta;
+import com.avaliacaods.bank.dtos.ContaDTO;
 import com.avaliacaods.bank.services.AccountsService;
 
 
@@ -22,8 +25,18 @@ public class AccountsController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Conta>> getUserAccounts() {
+    public ResponseEntity<List<ContaDTO>> getUserAccounts() {
         return ResponseEntity.ok(this.accountsService.getUserAccounts());
+    }
+
+    @PostMapping("")
+    public ResponseEntity<ContaDTO> createUserAccount() throws URISyntaxException {
+        
+        ContaDTO createdAccountDTO = this.accountsService.createUserAccount();
+
+        URI location = URI.create("/accounts/" + createdAccountDTO.getId()); 
+
+        return ResponseEntity.created(location).body(createdAccountDTO);
     }
 
 }
