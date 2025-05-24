@@ -43,9 +43,8 @@ export class AuthorizationInterceptor implements HttpInterceptor {
                     const isUserLoggedIn: boolean = this.userService.isUserLoggedIn();
                     
                     if (isUserLoggedIn){
-                        this.authenticationService.logoutUser();
                         
-                        this.confirmService.errorAutoClose("Sua sessão expirou","Por favor, faça login novamente");
+                        this.authenticationService.logoutUserSessionExpired();
 
 
                         return EMPTY; // evita que o erro do componente sobreponha o erro de sessao

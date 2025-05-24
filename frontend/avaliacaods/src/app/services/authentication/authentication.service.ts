@@ -32,8 +32,18 @@ export class AuthenticationService {
   logoutUser() {
     this.cookieService.deleteAll();
     this.userService.logoutUser();
+
     this.router.navigate(['/login']).then(() => {
-      window.location.reload(); 
+      window.location.reload();
+    });
+  }
+
+  logoutUserSessionExpired() {
+    this.cookieService.deleteAll();
+    this.userService.logoutUser();
+
+    this.router.navigate(['/login'], { queryParams: { sessionExpired: 'true' } }).then(() => {
+      window.location.reload();
     });
   }
 }

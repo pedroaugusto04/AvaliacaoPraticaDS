@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginUser } from '../../models/LoginUser';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { ConfirmService } from '../../services/confirm/confirm.service';
@@ -14,11 +14,11 @@ import { cpfLengthValidator } from '../../validators/cpfLengthValidator';
 
 @Component({
   selector: 'app-login',
-  imports: [MatIconModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule,CommonModule],
+  imports: [MatIconModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   cpf = new FormControl('', [Validators.required, cpfLengthValidator()]);
   senha = new FormControl('', [Validators.required]);
@@ -28,8 +28,17 @@ export class LoginComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     private confirmService: ConfirmService,
-    private cookieService: CookieService
-  ) {}
+    private cookieService: CookieService,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['sessionExpired'] === 'true') {
+        this.confirmService.errorAutoClose("Sua sessão expirou", "Por favor, faça login novamente");
+      }
+    });
+  }
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
@@ -62,7 +71,7 @@ export class LoginComponent {
       },
       error: (error) => {
         if (error.error && error.error.message) {
-          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          this.confirmService.error(error.error.message, error.error.subMessage ?? "");
           return;
         }
         this.confirmService.error('Erro ao realizar login', 'Por favor, verifique as informações inseridas');
