@@ -17,8 +17,10 @@ export class BankStatementService {
 
   getAccountBankStatements(numeroConta: string): Observable<BankStatement[]> {
     
-    const getUserBankStatementUrl = new URL(environment.apiGetUserBankStatementUrl, environment.baseUrl).toString();
-
-    return this.httpClient.get<BankStatement[]>(getUserBankStatementUrl, {headers: this.headers,params: { numeroConta: numeroConta }});
+    const getUserBankStatementUrl = new URL(`${environment.apiGetUserBankStatementUrl}/${numeroConta}`, environment.baseUrl).toString();
+  
+    return this.httpClient.get<BankStatement[]>(getUserBankStatementUrl, {
+      headers: this.headers
+    });
   }
 }

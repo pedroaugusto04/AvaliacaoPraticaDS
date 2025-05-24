@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import com.avaliacaods.bank.dtos.ContaDTO;
@@ -76,5 +77,20 @@ public class AccountsService {
         });
 
         return contasDTO;
+    }
+
+
+    public ContaDTO getUserAccountById(Long id) {
+
+        User user = this.userDetailsService.getLoggedUser();
+
+        Conta conta = this.accountsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+
+        // somente se a conta for do usuario logado
+        if (!conta.getCliente().getUser().getId().equals(user.getId())) {
+            throw new AccessDeniedException("");
+        }
+
+        return new ContaDTO(conta);
     }
 }

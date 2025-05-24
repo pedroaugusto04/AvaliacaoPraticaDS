@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.avaliacaods.bank.models.Lancamento;
 
 @Repository
-public interface TransactionsRepository extends JpaRepository<Lancamento,Integer>{
+public interface TransactionsRepository extends JpaRepository<Lancamento,Long>{
     
 }

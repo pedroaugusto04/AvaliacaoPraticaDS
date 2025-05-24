@@ -60,7 +60,8 @@ public class UserService {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 loginUserDTO.getCpf(), loginUserDTO.getSenha());
 
-        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        // lanca BadCredentialsException em caso de falha
+        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken); 
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 

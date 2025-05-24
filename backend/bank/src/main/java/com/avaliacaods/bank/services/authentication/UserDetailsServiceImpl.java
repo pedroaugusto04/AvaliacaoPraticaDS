@@ -1,5 +1,6 @@
 package com.avaliacaods.bank.services.authentication;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
-        User user = userRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByCpf(cpf).orElseThrow(() -> new BadCredentialsException(""));
         return new UserDetailsImpl(user);
     }
 

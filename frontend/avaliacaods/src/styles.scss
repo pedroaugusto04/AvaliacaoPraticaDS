@@ -9,6 +9,9 @@ app-root {
     padding: 0;
 }
 
+
+// retira spin button dos campos numericos
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -17,4 +20,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+button:hover {
+  background-color: #333399 !important;
 }
