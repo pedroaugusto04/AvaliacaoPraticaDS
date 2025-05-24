@@ -50,7 +50,11 @@ export class ClienteComponent {
         this.confirmService.successAutoClose("Cadastro realizado com sucesso!", "");
         this.router.navigate(['/login']);
       },
-      error: (e) => {
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao cadastrar", "Por favor, verifique as informações inseridas");
       }
     });

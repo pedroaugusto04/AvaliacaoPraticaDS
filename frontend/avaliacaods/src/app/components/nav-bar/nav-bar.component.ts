@@ -21,7 +21,11 @@ export class NavBarComponent implements OnInit {
       next: (user) => {
         this.user = user;
       },
-      error: () => {
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao recuperar informações do usuário", "");
       }
     })

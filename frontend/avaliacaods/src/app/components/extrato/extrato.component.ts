@@ -35,7 +35,11 @@ export class ExtratoComponent implements OnInit {
       next: (accounts) => {
         this.accounts$.next(accounts);
       },
-      error: () => {
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao recuperar contas do usuário", "");
       }
     })
@@ -57,7 +61,11 @@ export class ExtratoComponent implements OnInit {
           this.confirmService.warningAutoClose("Não foram encontrados extratos para a conta informada","");
         }
       },
-      error: () => {
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao recuperar o extrato da conta " + this.selectedAccount, "");
       }
     });

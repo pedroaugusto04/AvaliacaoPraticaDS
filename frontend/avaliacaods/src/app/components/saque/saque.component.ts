@@ -32,7 +32,11 @@ export class SaqueComponent {
       next: (accounts) => {
         this.accounts$.next(accounts);
       },
-      error: () => {
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao recuperar contas do usuário", "");
       }
     })
@@ -52,7 +56,11 @@ export class SaqueComponent {
       next:() => {
         this.confirmService.successAutoClose("Saque realizado com sucesso!","");
       },
-      error:() => {
+      error:(error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao sacar","");
       }
     })

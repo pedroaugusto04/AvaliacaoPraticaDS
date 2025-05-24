@@ -1,0 +1,19 @@
+package com.avaliacaods.bank.models.exception;
+
+public class ExceptionResponse {
+    private String message;
+    private String subMessage;
+
+    public ExceptionResponse(String message, String subMessage) {
+        this.message = message;
+        this.subMessage = subMessage;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getSubMessage() {
+        return subMessage;
+    }
+}

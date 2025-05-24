@@ -31,7 +31,11 @@ export class ContasComponent implements OnInit{
           
           this.dataSource = this.accounts$;
         },
-        error: () => {
+        error: (error) => {
+          if (error.error && error.error.message) {
+            this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+            return;
+          }
           this.confirmService.error("Erro ao recuperar contas do usuário","");
         }
       })
@@ -50,7 +54,11 @@ export class ContasComponent implements OnInit{
         this.confirmService.successAutoClose("Nova conta criada com sucesso!","");
 
       },
-      error:(e) => {
+      error:(error) => {
+        if (error.error && error.error.message) {
+          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          return;
+        }
         this.confirmService.error("Erro ao criar uma nova conta.","");
       }
     });
