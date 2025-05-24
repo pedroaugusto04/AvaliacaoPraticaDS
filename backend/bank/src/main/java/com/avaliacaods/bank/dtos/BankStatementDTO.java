@@ -13,7 +13,7 @@ public class BankStatementDTO {
     public BankStatementDTO() {}
 
     public BankStatementDTO(Lancamento lancamento) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         this.Data = lancamento.getData().format(formatter);
         this.valor = lancamento.getValor().toString();
         this.tipo = lancamento.getTipo();

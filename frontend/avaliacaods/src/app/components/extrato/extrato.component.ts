@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Account } from '../../models/Account';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account/account.service';
@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ExtratoComponent implements OnInit {
 
-  displayedColumns: string[] = ['data','valor','tipo'];
+  displayedColumns: string[] = ['data', 'valor', 'tipo'];
   dataSource: any;
 
   accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
@@ -37,7 +37,7 @@ export class ExtratoComponent implements OnInit {
       },
       error: (error) => {
         if (error.error && error.error.message) {
-          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          this.confirmService.error(error.error.message, error.error.subMessage ?? "");
           return;
         }
         this.confirmService.error("Erro ao recuperar contas do usuário", "");
@@ -47,28 +47,42 @@ export class ExtratoComponent implements OnInit {
 
   onSearch() {
     if (!this.selectedAccount) {
-      this.confirmService.errorAutoClose("Informações inválidas","Por favor, selecione a conta da qual deseja visualizar o extrato");
+      this.confirmService.errorAutoClose("Informações inválidas", "Por favor, selecione a conta da qual deseja visualizar o extrato");
       return;
     }
 
-    this.bankStatementService.getAccountBankStatements(this.selectedAccount).subscribe({
+    this.bankStatementService.getAccountBankStatements(this.selectedAccount).pipe(
+      map((bankStatements: BankStatement[]) => {
+        return bankStatements.sort((a, b) => {
+          return this.parseDate(b.data).getTime() - this.parseDate(a.data).getTime(); // ordena as datas de forma decrescente
+        });
+      })
+    ).subscribe({
       next: (bankStatements: BankStatement[]) => {
         this.bankStatements$.next(bankStatements);
 
-        this.dataSource = this.bankStatements$;
+        this.dataSource = bankStatements; 
 
-        if (bankStatements.length == 0){
-          this.confirmService.warningAutoClose("Não foram encontrados extratos para a conta informada","");
+        if (bankStatements.length == 0) {
+          this.confirmService.warningAutoClose("Não foram encontrados extratos para a conta informada", "");
         }
       },
       error: (error) => {
         if (error.error && error.error.message) {
-          this.confirmService.error(error.error.message,error.error.subMessage ?? "");
+          this.confirmService.error(error.error.message, error.error.subMessage ?? "");
           return;
         }
         this.confirmService.error("Erro ao recuperar o extrato da conta " + this.selectedAccount, "");
       }
     });
+  }
+
+  parseDate(dateStr: string): Date {
+    const [datePart, timePart] = dateStr.split(' ');
+    const [day, month, year] = datePart.split('/').map(Number);
+    const [hours, minutes, seconds] = timePart.split(':').map(Number);
+  
+    return new Date(year, month - 1, day, hours, minutes, seconds);
   }
 
 }
