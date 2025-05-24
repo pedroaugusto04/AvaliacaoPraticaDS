@@ -28,6 +28,7 @@ export class DepositoComponent implements OnInit{
   
   valor = new FormControl("");
   selectedAccount: string = "";
+  displayPrice: string = "";
 
   constructor(private accountService: AccountService, private depositService: DepositService, private confirmService:ConfirmService) {}
   
@@ -44,6 +45,24 @@ export class DepositoComponent implements OnInit{
         this.confirmService.error("Erro ao recuperar contas do usuário","");
       }
     })
+
+    // ajusta o valor digitado para reais a cada modificacao no input
+    this.valor.valueChanges.subscribe(val => {
+      if (val !== null && val !== undefined && val !== '') {
+        const numeric = Number(val);
+        if (!isNaN(numeric)) {
+          this.displayPrice = numeric.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 2,
+          });
+        } else {
+          this.displayPrice = "";
+        }
+      } else {
+        this.displayPrice = "";
+      }
+    });
   }
 
   onDeposit() {
@@ -60,6 +79,8 @@ export class DepositoComponent implements OnInit{
     this.depositService.deposit(deposit).subscribe({
       next:() => {
         this.confirmService.successAutoClose("Depósito realizado com sucesso!","");
+        this.valor.reset('');
+        this.selectedAccount = "";
       },
       error: (error) => {
         if (error.error && error.error.message) {
@@ -69,5 +90,40 @@ export class DepositoComponent implements OnInit{
         this.confirmService.errorAutoClose("Erro ao depositar","");
       }
     })
+  }
+
+  onPriceInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    // remove tudo que nao for numero
+    const rawNumbers = input.value.replace(/\D/g, '');
+
+    if (rawNumbers.length === 0) {
+      this.valor.setValue('');
+      return;
+    }
+
+    const numeric = Number(rawNumbers) / 100;
+
+    // atualiza o form control 
+    this.valor.setValue(numeric.toString(), { emitEvent: false });
+
+    this.displayPrice = numeric.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+    });
+
+    // mostra moeda formatada
+    input.value = this.displayPrice;
+  }
+
+  allowOnlyNumbers(event: KeyboardEvent): void {
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    const isNumber = /^[0-9]$/.test(event.key);
+
+    if (!isNumber && !allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
   }
 }

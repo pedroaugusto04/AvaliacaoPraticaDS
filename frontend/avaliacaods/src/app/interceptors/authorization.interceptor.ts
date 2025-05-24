@@ -7,7 +7,7 @@ import {
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { catchError, Observable, throwError } from "rxjs";
+import { catchError, EMPTY, Observable, throwError } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { ConfirmService } from "../services/confirm/confirm.service";
 import { UserService } from "../services/user/user.service";
@@ -46,6 +46,9 @@ export class AuthorizationInterceptor implements HttpInterceptor {
                         this.authenticationService.logoutUser();
                         
                         this.confirmService.errorAutoClose("Sua sessão expirou","Por favor, faça login novamente");
+
+
+                        return EMPTY; // evita que o erro do componente sobreponha o erro de sessao
                     }
 
 

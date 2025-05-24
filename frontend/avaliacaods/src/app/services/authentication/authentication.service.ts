@@ -7,6 +7,7 @@ import { UserService } from '../user/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../../models/LoginResponse';
+import { ConfirmService } from '../confirm/confirm.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class AuthenticationService {
 
   private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
-  constructor(private httpClient: HttpClient, private userService: UserService, private cookieService: CookieService, private router: Router) { }
+  constructor(private httpClient: HttpClient, private userService: UserService, private cookieService: CookieService, private router: Router,
+    private confirmService: ConfirmService
+  ) { }
 
 
   login(loginUser: LoginUser): Observable<LoginResponse> {
@@ -29,6 +32,8 @@ export class AuthenticationService {
   logoutUser() {
     this.cookieService.deleteAll();
     this.userService.logoutUser();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload(); 
+    });
   }
 }

@@ -6,10 +6,11 @@ import { AccountService } from '../../services/account/account.service';
 import { ConfirmService } from '../../services/confirm/confirm.service';
 import { BehaviorSubject } from 'rxjs';
 import { Account } from '../../models/Account';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contas',
-  imports: [NavBarComponent, MatTableModule],
+  imports: [NavBarComponent, MatTableModule,CommonModule],
   templateUrl: './contas.component.html',
   styleUrl: './contas.component.scss'
 })

@@ -14,13 +14,21 @@
                         }
                     </mat-select>
                 </mat-form-field>
+
                 <div class="value-div">
                     <h2 class="value-title">Valor</h2>
                     <mat-form-field class="field-value" appearance="outline">
-                        <input matInput placeholder="Digite o valor do depósito" [formControl]="valor">
+                      <input matInput 
+                             placeholder="Digite o valor do depósito" 
+                             [value]="displayPrice"
+                             (input)="onPriceInput($event)" 
+                             (keydown)="allowOnlyNumbers($event)">
                     </mat-form-field>
-                    <button (click)="onDeposit()" type="button" class="btn btn-primary button">Confirmar</button>
-                </div>
+          
+                    <button (click)="onDeposit()" type="button" class="btn btn-primary button">
+                      Confirmar
+                    </button>
+                  </div>
             </div>
         </div>
     </div>
