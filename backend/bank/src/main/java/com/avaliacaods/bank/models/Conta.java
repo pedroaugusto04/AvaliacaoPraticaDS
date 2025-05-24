@@ -1,0 +1,66 @@
+package com.avaliacaods.bank.models;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tbConta")
+public class Conta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(length = 100)
+    private String numero;
+
+    @ManyToOne
+    @JoinColumn(name = "idCliente")
+    private Client cliente;
+
+    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Lancamento> lancamentos = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Client getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Client cliente) {
+        this.cliente = cliente;
+    }
+
+    public Set<Lancamento> getLancamentos() {
+        return lancamentos;
+    }
+
+    public void setLancamentos(Set<Lancamento> lancamentos) {
+        this.lancamentos = lancamentos;
+    }
+}

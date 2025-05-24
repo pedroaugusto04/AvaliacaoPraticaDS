@@ -3,6 +3,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { Client } from '../../models/Client';
+import { ClientService } from '../../services/client/client.service';
+import { ConfirmService } from '../../services/confirm/confirm.service';
 
 @Component({
   selector: 'app-cliente',
@@ -11,12 +14,12 @@ import { Router } from '@angular/router';
   styleUrl: './cliente.component.scss'
 })
 export class ClienteComponent {
-  name = new FormControl("");
+  nome = new FormControl("");
   cpf = new FormControl("");
-  password = new FormControl("");
-  phone = new FormControl("");
+  senha = new FormControl("");
+  telefone = new FormControl("");
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private clientService: ClientService, private confirmService: ConfirmService) {}
 
 
   goToLogin() {
@@ -24,7 +27,22 @@ export class ClienteComponent {
   }
 
   onRegister() {
-    //
-    this.router.navigate(['/login']);
+    const client: Client = {
+      nome: this.nome.value ?? "",
+      cpf: this.cpf.value ?? "",
+      senha: this.senha.value ?? "",
+      telefone: this.telefone.value ?? ""
+    };
+
+
+    this.clientService.registerClient(client).subscribe({
+      next:() => {
+        this.confirmService.successAutoClose("Cadastro realizado com sucesso!","");
+        this.router.navigate(['/login']);
+      },
+      error:(e) => {
+        this.confirmService.error("Erro ao cadastrar","Por favor, verifique as informações inseridas");
+      }
+    })
   }
 }
