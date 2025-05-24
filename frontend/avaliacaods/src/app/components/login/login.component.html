@@ -15,18 +15,28 @@
     </div>
     <div class="inputs">
         <div class="button-hint">
-            <mat-hint>CPF</mat-hint>
+          <mat-hint>CPF</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-            <input matInput placeholder="Digite seu CPF" [formControl]="cpf">
+          <input matInput placeholder="Digite seu CPF" type="number" [formControl]="cpf">
+          <mat-error *ngIf="cpf.hasError('required')">CPF é obrigatório</mat-error>
+          <mat-error *ngIf="cpf.hasError('cpfLength') && !cpf.hasError('required')">
+            CPF deve ter 11 dígitos
+          </mat-error>
         </mat-form-field>
+      
         <div class="button-hint">
-            <mat-hint>Senha</mat-hint>
+          <mat-hint>Senha</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-            <input matInput placeholder="Digite sua Senha" [formControl]="senha">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Digite sua Senha" [formControl]="senha">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
+          <mat-error *ngIf="senha.hasError('minlength')">Senha deve ter no mínimo 6 caracteres</mat-error>
         </mat-form-field>
-    </div>
+      </div>
     
     <div class="buttons">
         <button (click)="goToRegister()" type="button" class="btn btn-primary button">Cadastrar</button>

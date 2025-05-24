@@ -39,9 +39,13 @@ export class SaqueComponent {
   }
 
   onWithdrawal() {
+    if (!this.selectedAccount || !this.valor.value) {
+      this.confirmService.errorAutoClose("Informações inválidas","Tanto a conta quanto o valor devem estar preenchidos");
+      return;
+    }
     const withdrawal: Withdrawal = {
       numeroConta: this.selectedAccount,
-      valor: this.valor.value || "0"
+      valor: this.valor.value
     }
 
     this.withdrawalService.withdraw(withdrawal).subscribe({

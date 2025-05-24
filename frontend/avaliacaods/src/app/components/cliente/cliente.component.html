@@ -14,39 +14,51 @@
 </div>
 <div class="inputs">
     <div class="button-hint">
-        <mat-hint>Nome</mat-hint>
+      <mat-hint>Nome</mat-hint>
     </div>
     <mat-form-field appearance="outline">
-        <input matInput placeholder="Digite seu Nome" [formControl]="nome">
+      <input matInput placeholder="Digite seu Nome" [formControl]="nome" />
+      <mat-error *ngIf="nome.hasError('required')">Nome é obrigatório</mat-error>
+      <mat-error *ngIf="nome.hasError('minlength')">Nome deve conter no mínimo 3 caracteres</mat-error>
     </mat-form-field>
+  
     <div class="register-data">
-        <div class = "cpf-input input">
-            <div class="button-hint">
-                <mat-hint>CPF</mat-hint>
-            </div>
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Digite seu CPF" [formControl]="cpf">
-            </mat-form-field>
+      <div class="cpf-input input">
+        <div class="button-hint">
+          <mat-hint>CPF</mat-hint>
         </div>
-        <div class = "password-input input">
-            <div class="button-hint">
-                <mat-hint>Senha</mat-hint>
-            </div>
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Digite sua Senha" [formControl]="senha">
-            </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Digite seu CPF" type="number" [formControl]="cpf"/>
+          <mat-error *ngIf="cpf.hasError('required')">CPF é obrigatório</mat-error>
+          <mat-error *ngIf="cpf.hasError('cpfLength') && !cpf.hasError('required')">CPF deve ter 11 dígitos</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="password-input input">
+        <div class="button-hint">
+          <mat-hint>Senha</mat-hint>
         </div>
-        <div class = "phone-input input">
-            <div class="button-hint">
-                <mat-hint>Telefone</mat-hint>
-            </div>
-            <mat-form-field appearance="outline">
-                <input matInput placeholder="Digite seu Telefone" [formControl]="telefone">
-            </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Digite sua Senha" [formControl]="senha" type="password" />
+          <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="phone-input input">
+        <div class="button-hint">
+          <mat-hint>Telefone</mat-hint>
         </div>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Digite seu Telefone" [formControl]="telefone" type="number" />
+          <mat-error *ngIf="telefone.hasError('required')">Telefone é obrigatório</mat-error>
+          <mat-error *ngIf="telefone.hasError('telefoneLength') && !telefone.hasError('required')">Telefone deve conter 11 dígitos</mat-error>
+        </mat-form-field>
+      </div>
     </div>
-    <div class = "buttons">
-        <button (click)="goToLogin()" type="button" class="btn btn-primary button">Login</button>
-        <button (click)="onRegister()" type="button" class="btn btn-primary button">Cadastrar</button>
+  
+    <div class="buttons">
+      <button (click)="goToLogin()" type="button" class="btn btn-primary button">Login</button>
+      <button (click)="onRegister()" type="button" class="btn btn-primary button">Cadastrar</button>
     </div>
-</div>
+  </div>
+  

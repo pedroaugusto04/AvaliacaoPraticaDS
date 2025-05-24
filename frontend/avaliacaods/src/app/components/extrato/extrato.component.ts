@@ -42,6 +42,11 @@ export class ExtratoComponent implements OnInit {
   }
 
   onSearch() {
+    if (!this.selectedAccount) {
+      this.confirmService.errorAutoClose("Informações inválidas","Por favor, selecione a conta da qual deseja visualizar o extrato");
+      return;
+    }
+
     this.bankStatementService.getAccountBankStatements(this.selectedAccount).subscribe({
       next: (bankStatements: BankStatement[]) => {
         this.bankStatements$.next(bankStatements);

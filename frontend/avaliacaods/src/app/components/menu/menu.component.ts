@@ -16,7 +16,7 @@ export class MenuComponent {
 
   user!: User;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private confirmService: ConfirmService){}
 
   goToAccount(){
     this.router.navigate(['/conta'])
@@ -36,5 +36,7 @@ export class MenuComponent {
 
   logout(){
     this.router.navigate(['/login'])
+    
+    this.confirmService.successAutoClose("Logout realizado com sucesso!","");
   }
 }

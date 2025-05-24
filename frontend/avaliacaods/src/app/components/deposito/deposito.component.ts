@@ -43,9 +43,14 @@ export class DepositoComponent implements OnInit{
   }
 
   onDeposit() {
+    if (!this.selectedAccount || !this.valor.value) {
+      this.confirmService.errorAutoClose("Informações inválidas","Tanto a conta quanto o valor devem estar preenchidos");
+      return;
+    }
+    
     const deposit: Deposit = {
       numeroConta: this.selectedAccount,
-      valor: this.valor.value ?? "0"
+      valor: this.valor.value
     }
 
     this.depositService.deposit(deposit).subscribe({
