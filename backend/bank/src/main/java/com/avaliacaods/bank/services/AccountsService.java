@@ -43,7 +43,7 @@ public class AccountsService {
 
         while (accountNumberAlreadyExists) {
             stringNumberAccount = new StringBuilder();
-            stringNumberAccount.append(client.getNome().substring(0, 2)); // 2 primeiras letras do nome
+            stringNumberAccount.append(client.getNome().substring(0, 2).toUpperCase()); // 2 primeiras letras do nome
             stringNumberAccount.append("-");
 
             int randomNumberSixDigits = ThreadLocalRandom.current().nextInt(100000, 1000000);

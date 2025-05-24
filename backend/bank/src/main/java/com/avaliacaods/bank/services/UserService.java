@@ -12,12 +12,14 @@ import com.avaliacaods.bank.dtos.JwtTokenDTO;
 import com.avaliacaods.bank.dtos.LoginUserDTO;
 import com.avaliacaods.bank.dtos.UserRequestDTO;
 import com.avaliacaods.bank.dtos.UserResponseDTO;
+import com.avaliacaods.bank.exceptions.InvalidCpfException;
 import com.avaliacaods.bank.models.Client;
 import com.avaliacaods.bank.models.authentication.Role;
 import com.avaliacaods.bank.models.authentication.User;
 import com.avaliacaods.bank.models.authentication.UserDetailsImpl;
 import com.avaliacaods.bank.models.enums.authentication.RoleName;
 import com.avaliacaods.bank.repositories.ClientRepository;
+import com.avaliacaods.bank.repositories.UserRepository;
 import com.avaliacaods.bank.services.authentication.JwtTokenService;
 import com.avaliacaods.bank.services.authentication.UserDetailsServiceImpl;
 
@@ -27,18 +29,20 @@ import jakarta.persistence.EntityNotFoundException;
 public class UserService {
 
     private ClientRepository clientRepository;
+    private UserRepository userRepository;
     private SecurityConfiguration securityConfiguration;
     private AuthenticationManager authenticationManager;
     private JwtTokenService jwtTokenService;
     private UserDetailsServiceImpl userDetailsService;
 
     UserService(ClientRepository clientRepository, SecurityConfiguration securityConfiguration,AuthenticationManager authenticationManager,
-    JwtTokenService jwtTokenService, UserDetailsServiceImpl userDetailsService) {
+    JwtTokenService jwtTokenService, UserDetailsServiceImpl userDetailsService, UserRepository userRepository) {
         this.clientRepository = clientRepository;
         this.securityConfiguration = securityConfiguration;
         this.authenticationManager = authenticationManager;
         this.jwtTokenService = jwtTokenService;
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     public UserResponseDTO getUserInfo() {
@@ -64,6 +68,13 @@ public class UserService {
     }
 
     public void registerUser(UserRequestDTO registerUserDTO) {
+        // verificacao de CPF
+        boolean cpfAlreadyExists = this.userRepository.existsByCpf(registerUserDTO.getCpf());
+
+        if (cpfAlreadyExists){
+            throw new InvalidCpfException("CPF inválido","Já existe um cliente registrado com este CPF");
+        }
+    
         Role userRole = new Role();
         userRole.setName(RoleName.ROLE_USER);
 

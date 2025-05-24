@@ -10,4 +10,6 @@ import com.avaliacaods.bank.models.authentication.User;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer>{
     Optional<User> findByCpf(String cpf);
+
+    boolean existsByCpf(String cpf);
 }
