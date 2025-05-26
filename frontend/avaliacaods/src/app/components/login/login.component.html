@@ -34,7 +34,8 @@
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
-          <mat-error *ngIf="senha.hasError('minlength')">Senha deve ter no mínimo 6 caracteres</mat-error>
+          <mat-error *ngIf="senha.hasError('minlength')">Senha deve conter no mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="senha.hasError('maxlength')">Senha deve conter no máximo 20 caracteres</mat-error>
         </mat-form-field>
       </div>
     

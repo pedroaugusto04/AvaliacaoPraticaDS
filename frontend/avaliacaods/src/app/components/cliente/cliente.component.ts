@@ -17,9 +17,9 @@ import { telefoneLengthValidator } from '../../validators/telefoneLengthValidato
   styleUrl: './cliente.component.scss'
 })
 export class ClienteComponent {
-  nome = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  nome = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(20)]);
   cpf = new FormControl('', [Validators.required, cpfLengthValidator()]);
-  senha = new FormControl('', [Validators.required]);
+  senha = new FormControl('', [Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
   telefone = new FormControl('', [Validators.required, telefoneLengthValidator()]);
 
   constructor(

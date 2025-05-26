@@ -45,24 +45,6 @@ export class DepositoComponent implements OnInit{
         this.confirmService.error("Erro ao recuperar contas do usuário","");
       }
     })
-
-    // ajusta o valor digitado para reais a cada modificacao no input
-    this.valor.valueChanges.subscribe(val => {
-      if (val !== null && val !== undefined && val !== '') {
-        const numeric = Number(val);
-        if (!isNaN(numeric)) {
-          this.displayPrice = numeric.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-          });
-        } else {
-          this.displayPrice = "";
-        }
-      } else {
-        this.displayPrice = "";
-      }
-    });
   }
 
   onDeposit() {
@@ -121,6 +103,11 @@ export class DepositoComponent implements OnInit{
 
     // mostra moeda formatada
     input.value = this.displayPrice;
+
+    if (this.displayPrice.length >= 10){
+      this.valor.setErrors({maxLength: true});
+      this.valor.markAsTouched();
+    }
   }
 
   allowOnlyNumbers(event: KeyboardEvent): void {

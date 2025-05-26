@@ -2,13 +2,10 @@ package com.avaliacaods.bank.dtos;
 
 import com.avaliacaods.bank.models.enums.TipoLancamento;
 
-import io.micrometer.common.lang.Nullable;
-
 public class LancamentoDTO {
+    
     String numeroConta;
     String valor;
-    
-    @Nullable
     TipoLancamento tipoLancamento;
 
     public String getNumeroConta() {

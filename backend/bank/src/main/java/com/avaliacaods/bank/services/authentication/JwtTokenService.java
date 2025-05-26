@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -15,9 +16,11 @@ import com.avaliacaods.bank.models.authentication.UserDetailsImpl;
 @Service
 public class JwtTokenService {
 
-    private static final String SECRET_KEY = "4Z^XrroxR@dWxqf$mTTKwW$!@#qGr4P";
+    @Value("${SECRET_KEY_JWT}")
+    private String SECRET_KEY;
 
-    private static final String ISSUER = "bank_api";
+    @Value("${ISSUER_JWT}")
+    private String ISSUER;
 
     public String generateToken(UserDetailsImpl user) {
         try {

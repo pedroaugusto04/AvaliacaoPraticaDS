@@ -20,6 +20,7 @@
       <input matInput placeholder="Digite seu Nome" [formControl]="nome" />
       <mat-error *ngIf="nome.hasError('required')">Nome é obrigatório</mat-error>
       <mat-error *ngIf="nome.hasError('minlength')">Nome deve conter no mínimo 3 caracteres</mat-error>
+      <mat-error *ngIf="nome.hasError('maxlength')">Nome deve conter no máximo 20 caracteres</mat-error>
     </mat-form-field>
   
     <div class="register-data">
@@ -41,6 +42,8 @@
         <mat-form-field appearance="outline">
           <input matInput placeholder="Digite sua Senha" [formControl]="senha" type="password" />
           <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
+          <mat-error *ngIf="senha.hasError('minlength')">Senha deve conter no mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="senha.hasError('maxlength')">Senha deve conter no máximo 20 caracteres</mat-error>
         </mat-form-field>
       </div>
   

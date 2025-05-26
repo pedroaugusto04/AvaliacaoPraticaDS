@@ -21,7 +21,7 @@ import { cpfLengthValidator } from '../../validators/cpfLengthValidator';
 export class LoginComponent implements OnInit {
 
   cpf = new FormControl('', [Validators.required, cpfLengthValidator()]);
-  senha = new FormControl('', [Validators.required]);
+  senha = new FormControl('', [Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
   hidePassword = true;
 
   constructor(
