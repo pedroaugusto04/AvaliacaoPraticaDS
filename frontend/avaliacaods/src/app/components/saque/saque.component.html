@@ -7,7 +7,7 @@
   <div class="select">
     <h2>Conta</h2>
     <div class="inputs">
-      <mat-form-field class="field-account" appearance="outline">
+      <mat-form-field class="field-account" appearance="outline" (click)="onSelectClick()">
         <mat-label>Selecione uma conta</mat-label>
         <mat-select [(ngModel)]="selectedAccount" name="selectedAccount">
           @for (account of accounts; track account.numero) {

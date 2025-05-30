@@ -29,6 +29,11 @@ svg {
     cursor: pointer;
 }
 
+svg:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
 .user-info {
     display: flex;
     justify-content: flex-end;

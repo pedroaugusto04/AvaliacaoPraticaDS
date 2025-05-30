@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Account } from '../../models/Account';
 import { Router } from '@angular/router';
@@ -11,17 +11,19 @@ import { CommonModule } from '@angular/common';
 import { BankStatement } from '../../models/BankStatement';
 import { BankStatementService } from '../../services/bank-statement/bank-statement.service';
 import { FormsModule } from '@angular/forms';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-extrato',
-  imports: [NavBarComponent, MatSelectModule, MatTableModule, CommonModule, FormsModule],
+  imports: [NavBarComponent, MatSelectModule, MatTableModule, CommonModule, FormsModule, MatPaginatorModule],
   templateUrl: './extrato.component.html',
   styleUrl: './extrato.component.scss'
 })
 export class ExtratoComponent implements OnInit {
 
   displayedColumns: string[] = ['data', 'valor', 'tipo'];
-  dataSource: any;
+  dataSource!: MatTableDataSource<BankStatement>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
   bankStatements$: BehaviorSubject<BankStatement[]> = new BehaviorSubject<BankStatement[]>([]);
@@ -61,7 +63,8 @@ export class ExtratoComponent implements OnInit {
       next: (bankStatements: BankStatement[]) => {
         this.bankStatements$.next(bankStatements);
 
-        this.dataSource = bankStatements; 
+        this.dataSource = new MatTableDataSource(bankStatements);
+        this.dataSource.paginator = this.paginator;
 
         if (bankStatements.length == 0) {
           this.confirmService.warningAutoClose("Não foram encontrados extratos para a conta informada", "");
@@ -81,8 +84,14 @@ export class ExtratoComponent implements OnInit {
     const [datePart, timePart] = dateStr.split(' ');
     const [day, month, year] = datePart.split('/').map(Number);
     const [hours, minutes, seconds] = timePart.split(':').map(Number);
-  
+
     return new Date(year, month - 1, day, hours, minutes, seconds);
+  }
+  
+  onSelectClick() {
+    if (this.accounts$.getValue().length == 0){
+      this.confirmService.warningAutoClose("Nenhuma conta encontrada","É possível criar uma conta na seção 'Contas'");
+    }
   }
 
 }

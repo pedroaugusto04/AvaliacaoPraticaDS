@@ -4,7 +4,7 @@
     <h1>Extrato</h1>
     <div class="select">
         <h2>Conta</h2>
-        <mat-form-field class="field-account" appearance="outline">
+        <mat-form-field class="field-account" appearance="outline" (click)="onSelectClick()">
             <mat-label>Selecione uma conta</mat-label>
             <mat-select [(ngModel)]="selectedAccount" name="selectedAccount">
                 @for (account of accounts; track account.numero) {
@@ -38,5 +38,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 }

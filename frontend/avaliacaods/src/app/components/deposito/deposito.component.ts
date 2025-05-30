@@ -113,4 +113,10 @@ export class DepositoComponent implements OnInit{
       event.preventDefault();
     }
   }
+
+  onSelectClick() {
+    if (this.accounts$.getValue().length == 0){
+      this.confirmService.warningAutoClose("Nenhuma conta encontrada","É possível criar uma conta na seção 'Contas'");
+    }
+  }
 }

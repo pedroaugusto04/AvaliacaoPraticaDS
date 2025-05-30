@@ -23,7 +23,7 @@ export class ContasComponent implements OnInit{
   dataSource: any;
   accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
-  constructor(private router: Router, private accountService: AccountService, private confirmService: ConfirmService) {}
+  constructor(private accountService: AccountService, private confirmService: ConfirmService) {}
 
   ngOnInit(): void {
       this.accountService.getUserAccounts().subscribe({
@@ -31,6 +31,10 @@ export class ContasComponent implements OnInit{
           this.accounts$.next(accounts);
           
           this.dataSource = this.accounts$;
+
+          if (accounts.length == 0){
+            this.confirmService.warningAutoClose("Nenhuma conta encontrada","");
+          }
         },
         error: (error) => {
           if (error.error && error.error.message) {
