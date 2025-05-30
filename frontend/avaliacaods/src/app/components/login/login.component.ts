@@ -11,10 +11,12 @@ import { ConfirmService } from '../../services/confirm/confirm.service';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { cpfLengthValidator } from '../../validators/cpfLengthValidator';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-login',
-  imports: [MatIconModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule],
+  imports: [MatIconModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule, NgxMaskDirective],
+  providers:[provideNgxMask()],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

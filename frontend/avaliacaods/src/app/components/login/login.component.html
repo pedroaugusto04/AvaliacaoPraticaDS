@@ -18,7 +18,7 @@
           <mat-hint>CPF</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Digite seu CPF" type="number" [formControl]="cpf">
+          <input matInput placeholder="000.000.000-00" type="text" [formControl]="cpf" mask="000.000.000-00">
           <mat-error *ngIf="cpf.hasError('required')">CPF é obrigatório</mat-error>
           <mat-error *ngIf="cpf.hasError('cpfLength') && !cpf.hasError('required')">
             CPF deve ter 11 dígitos
@@ -29,13 +29,15 @@
           <mat-hint>Senha</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-          <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Digite sua Senha" [formControl]="senha">
-          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+          <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Digite sua Senha" [formControl]="senha" maxLength="20">
+          <button class = "visibility-button" mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
             <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
           <mat-error *ngIf="senha.hasError('minlength')">Senha deve conter no mínimo 3 caracteres</mat-error>
-          <mat-error *ngIf="senha.hasError('maxlength')">Senha deve conter no máximo 20 caracteres</mat-error>
+          <mat-hint align="end" [ngClass]="{'limite-alcancado': senha.value?.length === 20}">
+            {{ senha.value?.length || 0 }} / 20
+          </mat-hint>
         </mat-form-field>
       </div>
     

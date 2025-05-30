@@ -9,15 +9,17 @@ import { ConfirmService } from '../../services/confirm/confirm.service';
 import { CommonModule } from '@angular/common';
 import { cpfLengthValidator } from '../../validators/cpfLengthValidator';
 import { telefoneLengthValidator } from '../../validators/telefoneLengthValidator';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-cliente',
-  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule,CommonModule],
+  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule,CommonModule, NgxMaskDirective],
+  providers: [provideNgxMask()],
   templateUrl: './cliente.component.html',
   styleUrl: './cliente.component.scss'
 })
 export class ClienteComponent {
-  nome = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(20)]);
+  nome = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(50)]);
   cpf = new FormControl('', [Validators.required, cpfLengthValidator()]);
   senha = new FormControl('', [Validators.required,Validators.minLength(3),Validators.maxLength(20)]);
   telefone = new FormControl('', [Validators.required, telefoneLengthValidator()]);

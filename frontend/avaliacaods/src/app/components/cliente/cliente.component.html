@@ -17,10 +17,12 @@
       <mat-hint>Nome</mat-hint>
     </div>
     <mat-form-field appearance="outline">
-      <input matInput placeholder="Digite seu Nome" [formControl]="nome" />
+      <input matInput placeholder="Digite seu Nome" [formControl]="nome" maxLength="50"/>
       <mat-error *ngIf="nome.hasError('required')">Nome é obrigatório</mat-error>
       <mat-error *ngIf="nome.hasError('minlength')">Nome deve conter no mínimo 3 caracteres</mat-error>
-      <mat-error *ngIf="nome.hasError('maxlength')">Nome deve conter no máximo 20 caracteres</mat-error>
+      <mat-hint align="end" [ngClass]="{'limite-alcancado': nome.value?.length === 50}">
+        {{ nome.value?.length || 0 }} / 50
+      </mat-hint>
     </mat-form-field>
   
     <div class="register-data">
@@ -29,7 +31,7 @@
           <mat-hint>CPF</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Digite seu CPF" type="number" [formControl]="cpf"/>
+          <input matInput placeholder="000.000.000-00" type="text" [formControl]="cpf" mask="000.000.000-00"/>
           <mat-error *ngIf="cpf.hasError('required')">CPF é obrigatório</mat-error>
           <mat-error *ngIf="cpf.hasError('cpfLength') && !cpf.hasError('required')">CPF deve ter 11 dígitos</mat-error>
         </mat-form-field>
@@ -40,10 +42,12 @@
           <mat-hint>Senha</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Digite sua Senha" [formControl]="senha" type="password" />
+          <input matInput placeholder="Digite sua Senha" [formControl]="senha" type="password" maxLength="20"/>
           <mat-error *ngIf="senha.hasError('required')">Senha é obrigatória</mat-error>
           <mat-error *ngIf="senha.hasError('minlength')">Senha deve conter no mínimo 3 caracteres</mat-error>
-          <mat-error *ngIf="senha.hasError('maxlength')">Senha deve conter no máximo 20 caracteres</mat-error>
+          <mat-hint align="end" [ngClass]="{'limite-alcancado': senha.value?.length === 20}">
+            {{ senha.value?.length || 0 }} / 20
+          </mat-hint>
         </mat-form-field>
       </div>
   
@@ -52,7 +56,7 @@
           <mat-hint>Telefone</mat-hint>
         </div>
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Digite seu Telefone" [formControl]="telefone" type="number" />
+          <input matInput placeholder="(00) 00000-0000" [formControl]="telefone" type="text" mask="(00) 00000-0000" />
           <mat-error *ngIf="telefone.hasError('required')">Telefone é obrigatório</mat-error>
           <mat-error *ngIf="telefone.hasError('telefoneLength') && !telefone.hasError('required')">Telefone deve conter 11 dígitos</mat-error>
         </mat-form-field>

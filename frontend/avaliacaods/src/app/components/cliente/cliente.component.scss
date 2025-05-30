@@ -66,6 +66,12 @@ button {
     background-color: #000066;
 }
 
+.limite-alcancado {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+
 @media (max-width: 480px) {
     .nav {
         flex-direction: column;

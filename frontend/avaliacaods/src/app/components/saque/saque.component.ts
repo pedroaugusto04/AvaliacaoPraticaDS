@@ -104,11 +104,6 @@ export class SaqueComponent implements OnInit {
 
     // mostra moeda formatada
     input.value = this.displayPrice;
-
-    if (this.displayPrice.length >= 10){
-      this.valor.setErrors({maxLength: true});
-      this.valor.markAsTouched();
-    }
   }
 
   allowOnlyNumbers(event: KeyboardEvent): void {

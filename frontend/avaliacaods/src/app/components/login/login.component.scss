@@ -9,7 +9,6 @@
 .main-title {
     display: flex;
     flex-direction: row;
-    max-height: 8rem;
     margin-top: 3rem;
 }
 
@@ -58,4 +57,58 @@ mat-form-field, .button-hint {
 .content {
     margin-right: 4rem;
     
+}
+
+.visibility-button {
+    background-color: white !important;
+    margin-right: 0.2rem;
+}
+
+.limite-alcancado {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .title-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0.5rem;
+    }
+
+    mat-form-field, .button-hint {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .button {
+        width: 90%;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .content {
+        margin: 0 1rem;
+    }
 }

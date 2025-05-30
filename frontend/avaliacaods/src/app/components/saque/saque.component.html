@@ -21,9 +21,6 @@
         <mat-form-field class="field-value" appearance="outline">
           <input matInput placeholder="Digite o valor do saque" [value]="displayPrice" (input)="onPriceInput($event)"
             (keydown)="allowOnlyNumbers($event)" [formControl]="valor" maxLength="10">
-          <mat-error *ngIf="valor.hasError('maxLength')">
-            O valor máximo para saque é R$ 9.999,99
-          </mat-error>
         </mat-form-field>
         <button (click)="onWithdrawal()" type="button" class="btn btn-primary button">
           Confirmar
