@@ -12,6 +12,17 @@
     margin-left: 5rem;
 }
 
+.btn-back {
+    border: none !important;
+    background-color: white !important;
+    margin-bottom: 1rem;
+}
+
+.btn-back mat-icon {
+    color: #000066 !important;
+    transform: scale(1.5);
+}
+
 
 .table {
     display: flex;

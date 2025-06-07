@@ -12,10 +12,11 @@ import { BankStatement } from '../../models/BankStatement';
 import { BankStatementService } from '../../services/bank-statement/bank-statement.service';
 import { FormsModule } from '@angular/forms';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-extrato',
-  imports: [NavBarComponent, MatSelectModule, MatTableModule, CommonModule, FormsModule, MatPaginatorModule],
+  imports: [NavBarComponent, MatSelectModule, MatTableModule, CommonModule, FormsModule, MatPaginatorModule, MatIconModule],
   templateUrl: './extrato.component.html',
   styleUrl: './extrato.component.scss'
 })
@@ -92,6 +93,10 @@ export class ExtratoComponent implements OnInit {
     if (this.accounts$.getValue().length == 0){
       this.confirmService.warningAutoClose("Nenhuma conta encontrada","É possível criar uma conta na seção 'Contas'");
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/menu']);
   }
 
 }

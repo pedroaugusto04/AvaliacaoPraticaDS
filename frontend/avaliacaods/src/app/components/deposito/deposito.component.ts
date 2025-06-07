@@ -12,11 +12,13 @@ import { CommonModule } from '@angular/common';
 import { Deposit } from '../../models/Deposit';
 import { DepositService } from '../../services/deposit/deposit.service';
 import { AccountService } from '../../services/account/account.service';
+import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deposito',
   imports: [NavBarComponent,MatInputModule, MatSelectModule,MatFormFieldModule,MatButtonModule, ReactiveFormsModule,
-    CommonModule, MatSelectModule, FormsModule
+    CommonModule, MatSelectModule, FormsModule, MatIconModule
   ],
   templateUrl: './deposito.component.html',
   styleUrl: './deposito.component.scss'
@@ -30,7 +32,8 @@ export class DepositoComponent implements OnInit{
   selectedAccount: string = "";
   displayPrice: string = "";
 
-  constructor(private accountService: AccountService, private depositService: DepositService, private confirmService:ConfirmService) {}
+  constructor(private accountService: AccountService, private depositService: DepositService, 
+    private confirmService:ConfirmService, private router: Router) {}
   
   ngOnInit(): void {
     this.accountService.getUserAccounts().subscribe({
@@ -118,5 +121,9 @@ export class DepositoComponent implements OnInit{
     if (this.accounts$.getValue().length == 0){
       this.confirmService.warningAutoClose("Nenhuma conta encontrada","É possível criar uma conta na seção 'Contas'");
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/menu']);
   }
 }

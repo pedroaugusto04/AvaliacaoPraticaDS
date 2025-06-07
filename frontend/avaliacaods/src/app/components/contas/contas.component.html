@@ -1,5 +1,8 @@
 <app-nav-bar></app-nav-bar>
 <div class="content">
+    <button class="btn-back" (click)="goBack()" aria-label="Voltar para menu">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <div class="table-title">
         <h2>Contas</h2>
         <button (click)="createAccount()" type="button" class="btn btn-primary button">Criar nova conta</button>
@@ -14,7 +17,8 @@
 
             <ng-container matColumnDef="saldo">
                 <th mat-header-cell *matHeaderCellDef> Saldo </th>
-                <td mat-cell *matCellDef="let item"> {{item.saldo ? (item.saldo | currency:'BRL':'symbol':'1.2-2') : 'R$ 0,00'}} </td>
+                <td mat-cell *matCellDef="let item"> {{item.saldo ? (item.saldo | currency:'BRL':'symbol':'1.2-2') : 'R$
+                    0,00'}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

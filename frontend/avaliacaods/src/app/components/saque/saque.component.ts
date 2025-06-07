@@ -12,11 +12,14 @@ import { WithDrawalService } from '../../services/withdrawal/withdrawal.service'
 import { ConfirmService } from '../../services/confirm/confirm.service';
 import { CommonModule } from '@angular/common';
 import { Withdrawal } from '../../models/Withdrawal';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-saque',
   standalone: true,
-  imports: [NavBarComponent, MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [NavBarComponent, MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, ReactiveFormsModule, 
+    CommonModule, FormsModule,MatIconModule],
   templateUrl: './saque.component.html',
   styleUrls: ['./saque.component.scss']
 })
@@ -30,7 +33,8 @@ export class SaqueComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private withdrawalService: WithDrawalService,
-    private confirmService: ConfirmService
+    private confirmService: ConfirmService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -119,5 +123,9 @@ export class SaqueComponent implements OnInit {
     if (this.accounts$.getValue().length == 0){
       this.confirmService.warningAutoClose("Nenhuma conta encontrada","É possível criar uma conta na seção 'Contas'");
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/menu']);
   }
 }

@@ -2,6 +2,9 @@
 
 @if(accounts$ | async; as accounts){
 <div class="content">
+  <button class="btn-back" (click)="goBack()" aria-label="Voltar para menu">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
   <h2>Saque</h2>
 
   <div class="select">

@@ -1,6 +1,9 @@
 @if(accounts$ | async; as accounts){
     <app-nav-bar></app-nav-bar>
 <div class="content">
+    <button class="btn-back" (click)="goBack()" aria-label="Voltar para menu">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <h1>Extrato</h1>
     <div class="select">
         <h2>Conta</h2>

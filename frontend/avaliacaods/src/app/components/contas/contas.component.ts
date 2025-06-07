@@ -7,10 +7,11 @@ import { ConfirmService } from '../../services/confirm/confirm.service';
 import { BehaviorSubject } from 'rxjs';
 import { Account } from '../../models/Account';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-contas',
-  imports: [NavBarComponent, MatTableModule,CommonModule],
+  imports: [NavBarComponent, MatTableModule,CommonModule, MatIconModule],
   templateUrl: './contas.component.html',
   styleUrl: './contas.component.scss'
 })
@@ -23,7 +24,7 @@ export class ContasComponent implements OnInit{
   dataSource: any;
   accounts$: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
-  constructor(private accountService: AccountService, private confirmService: ConfirmService) {}
+  constructor(private accountService: AccountService, private confirmService: ConfirmService, private router: Router) {}
 
   ngOnInit(): void {
       this.accountService.getUserAccounts().subscribe({
@@ -67,5 +68,9 @@ export class ContasComponent implements OnInit{
         this.confirmService.error("Erro ao criar uma nova conta.","");
       }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/menu']);
   }
 }
