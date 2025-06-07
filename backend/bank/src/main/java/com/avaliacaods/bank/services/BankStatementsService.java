@@ -1,5 +1,6 @@
 package com.avaliacaods.bank.services;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.avaliacaods.bank.dtos.BankStatementDTO;
 import com.avaliacaods.bank.models.Conta;
+import com.avaliacaods.bank.models.Lancamento;
 import com.avaliacaods.bank.repositories.AccountsRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -34,4 +36,19 @@ public class BankStatementsService {
         return bankStatements;
     }
 
+
+    public BigDecimal getSaldoAllAccounts() {
+        
+        List<Conta> accounts = this.accountsRepository.findAll();
+
+        BigDecimal sum = new BigDecimal(0);
+
+        for (Conta conta : accounts) {
+            for (Lancamento lancamento : conta.getLancamentos()) {
+                sum = sum.add(lancamento.getValor());
+            }
+        }
+
+        return sum;
+    }
 }

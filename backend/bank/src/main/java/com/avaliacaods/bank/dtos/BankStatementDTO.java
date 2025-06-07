@@ -4,11 +4,13 @@ import java.time.format.DateTimeFormatter;
 
 import com.avaliacaods.bank.models.Lancamento;
 import com.avaliacaods.bank.models.enums.TipoLancamento;
+import com.avaliacaods.bank.models.enums.TipoOperacao;
 
 public class BankStatementDTO {
     private String Data;
     private String valor;
     private TipoLancamento tipo;
+    private TipoOperacao tipoOperacao;
 
     public BankStatementDTO() {}
 
@@ -17,6 +19,7 @@ public class BankStatementDTO {
         this.Data = lancamento.getData().format(formatter);
         this.valor = lancamento.getValor().toString();
         this.tipo = lancamento.getTipo();
+        this.tipoOperacao = lancamento.getTipoOperacao();
     }
 
     public String getData() {
@@ -42,6 +45,14 @@ public class BankStatementDTO {
 
     public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
+    }
+
+    public TipoOperacao getTipoOperacao() {
+        return tipoOperacao;
+    }
+
+    public void setTipoOperacao(TipoOperacao tipoOperacao) {
+        this.tipoOperacao = tipoOperacao;
     }
 
 }

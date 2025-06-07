@@ -9,6 +9,7 @@ import com.avaliacaods.bank.exceptions.InvalidTransactionException;
 import com.avaliacaods.bank.models.Conta;
 import com.avaliacaods.bank.models.Lancamento;
 import com.avaliacaods.bank.models.enums.TipoLancamento;
+import com.avaliacaods.bank.models.enums.TipoOperacao;
 import com.avaliacaods.bank.repositories.AccountsRepository;
 import com.avaliacaods.bank.repositories.TransactionsRepository;
 
@@ -51,6 +52,7 @@ public class WithdrawalService {
         }
 
         withdrawalDTO.setTipoLancamento(TipoLancamento.DEBITO);
+        withdrawalDTO.setTipoOperacao(TipoOperacao.SAQUE);
 
         Lancamento withDrawal = new Lancamento(withdrawalDTO,conta);
 

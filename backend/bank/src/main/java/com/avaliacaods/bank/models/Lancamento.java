@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.avaliacaods.bank.dtos.LancamentoDTO;
 import com.avaliacaods.bank.models.enums.TipoLancamento;
+import com.avaliacaods.bank.models.enums.TipoOperacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,6 +39,8 @@ public class Lancamento {
 
     private TipoLancamento tipo;
 
+    private TipoOperacao tipoOperacao;
+
     Lancamento() {
     }
 
@@ -48,6 +51,7 @@ public class Lancamento {
         this.setConta(conta);
         this.setValor(valorConta);
         this.setTipo(lancamentoDTO.getTipoLancamento());
+        this.setTipoOperacao(lancamentoDTO.getTipoOperacao());
     }
 
     public Long getId() {
@@ -88,6 +92,14 @@ public class Lancamento {
 
     public void setData(LocalDateTime data) {
         this.data = data;
+    }
+
+    public TipoOperacao getTipoOperacao() {
+        return tipoOperacao;
+    }
+
+    public void setTipoOperacao(TipoOperacao tipoOperacao) {
+        this.tipoOperacao = tipoOperacao;
     }
 
 }

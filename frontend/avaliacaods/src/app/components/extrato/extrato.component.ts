@@ -22,7 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ExtratoComponent implements OnInit {
 
-  displayedColumns: string[] = ['data', 'valor', 'tipo'];
+  displayedColumns: string[] = ['data', 'valor', 'tipo','tipoOperacao'];
   dataSource!: MatTableDataSource<BankStatement>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
