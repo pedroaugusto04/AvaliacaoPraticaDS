@@ -9,6 +9,7 @@ public class ContaDTO {
     private Long id;
     private String numero;
     private BigDecimal saldo;
+    private Double limiteCredito;
 
 
     public ContaDTO() {}
@@ -27,6 +28,8 @@ public class ContaDTO {
             }; 
         })
         .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        this.limiteCredito = conta.getLimiteCredito();
     }
 
 
@@ -53,4 +56,13 @@ public class ContaDTO {
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
+
+    public Double getLimiteCredito() {
+        return limiteCredito;
+    }
+
+    public void setLimiteCredito(Double limiteCredito) {
+        this.limiteCredito = limiteCredito;
+    }
+
 }

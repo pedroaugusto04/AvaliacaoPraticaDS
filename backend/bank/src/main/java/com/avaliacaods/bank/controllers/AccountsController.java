@@ -8,10 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avaliacaods.bank.dtos.ContaDTO;
+import com.avaliacaods.bank.dtos.LimitDTO;
 import com.avaliacaods.bank.services.AccountsService;
 
 @RestController
@@ -43,6 +46,14 @@ public class AccountsController {
     public ResponseEntity<ContaDTO> getUserAccountById(@PathVariable Long id) {
         
         return ResponseEntity.ok(this.accountsService.getUserAccountById(id));
+    }
+
+    @PutMapping("/limit")
+    public ResponseEntity<Void> updateLimit(@RequestBody LimitDTO limitDTO) {
+        
+        this.accountsService.updateLimit(limitDTO);
+
+        return ResponseEntity.ok().build();
     }
 
 }

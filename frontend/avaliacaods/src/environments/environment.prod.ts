@@ -8,5 +8,6 @@ export const environment = {
     apiUrlUserInfo: '/users/me',
     apiDepositUrl: '/deposits',
     apiWithdrawalUrl: '/withdrawals',
-    apiGetUserBankStatementUrl: '/bankstatements'
+    apiGetUserBankStatementUrl: '/bankstatements',
+    apiUpdateLimitUrl: "/accounts/limit"
 };

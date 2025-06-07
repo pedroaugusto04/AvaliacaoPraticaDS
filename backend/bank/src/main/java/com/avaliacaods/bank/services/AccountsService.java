@@ -8,6 +8,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import com.avaliacaods.bank.dtos.ContaDTO;
+import com.avaliacaods.bank.dtos.LimitDTO;
 import com.avaliacaods.bank.models.Client;
 import com.avaliacaods.bank.models.Conta;
 import com.avaliacaods.bank.models.authentication.User;
@@ -92,5 +93,14 @@ public class AccountsService {
         }
 
         return new ContaDTO(conta);
+    }
+
+    public void updateLimit(LimitDTO limitDTO) {
+
+        Conta conta = this.accountsRepository.findByNumero(limitDTO.getNumeroConta()).orElseThrow(() -> new EntityNotFoundException());
+
+        conta.setLimiteCredito(Double.valueOf(limitDTO.getValor()));
+
+        this.accountsRepository.save(conta);
     }
 }

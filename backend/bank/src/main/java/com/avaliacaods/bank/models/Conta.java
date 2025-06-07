@@ -29,6 +29,8 @@ public class Conta {
     @JoinColumn(name = "idCliente")
     private Client cliente;
 
+    private Double limiteCredito = (double)0;
+
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Lancamento> lancamentos = new HashSet<>();
 
@@ -69,5 +71,13 @@ public class Conta {
 
     public void setLancamentos(Set<Lancamento> lancamentos) {
         this.lancamentos = lancamentos;
+    }
+
+    public Double getLimiteCredito() {
+        return limiteCredito;
+    }
+
+    public void setLimiteCredito(Double limiteCredito) {
+        this.limiteCredito = limiteCredito;
     }
 }

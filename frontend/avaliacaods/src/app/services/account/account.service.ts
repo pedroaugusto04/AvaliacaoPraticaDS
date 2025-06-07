@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginUser } from '../../models/LoginUser';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Account } from '../../models/Account';
+import { AccountLimit } from '../../models/AccountLimit';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,12 @@ export class AccountService {
     const createUserAccountsUrl = new URL(environment.apiCreateUserAccountUrl, environment.baseUrl).toString();
 
     return this.httpClient.post<Account>(createUserAccountsUrl, { headers: this.headers });
+  }
+
+  newAccountLimit(newLimit: AccountLimit): Observable<void> {
+
+    const updateLimitUrl = new URL(environment.apiUpdateLimitUrl,environment.baseUrl).toString();
+
+    return this.httpClient.put<void>(updateLimitUrl, newLimit, { headers: this.headers });
   }
 }

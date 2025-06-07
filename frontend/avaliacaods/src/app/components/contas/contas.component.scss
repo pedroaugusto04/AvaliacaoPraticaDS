@@ -35,13 +35,51 @@ button {
     background-color: #000066;
 }
 
+.button-confirm {
+    height: 3rem;
+    width: 10rem;
+}
+
 .mat-column-numeroConta {
-    width: 90% !important;
+    width: 80% !important;
 }
 
 .mat-column-saldo {
     width: 10% !important;
 }
+
+.field-account {
+    width: 100%;
+    height: 2.5rem;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.inputs {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.field-value {
+    width: 100%;
+}
+
+.value-div {
+    position: relative;
+}
+
+.value-title {
+    position: absolute;
+    top: -3rem;
+    left: 0;
+}
+
 
 @media (max-width: 480px) {
     .content {
@@ -52,4 +90,55 @@ button {
         flex-direction: column;
         margin-right: 0;
     }
+
+    .inputs {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .field-value {
+        width: 100%;
+    }
+
+    .value-div {
+        margin-top: 1rem;
+        position: static;
+    }
+
+    .value-title {
+        position: static;
+        margin-bottom: 0.3rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .content {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .select {
+        margin-top: 2rem;
+        margin-left: 0;
+    }
+
+    .inputs {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .field-account {
+        width: 100%;
+        height: 2.5rem;
+    }
+
+    .button {
+        max-width: 100%;
+        height: 3.5rem;
+        font-size: 1rem;
+    }
+
 }
