@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.avaliacaods.bank.dtos.ContaDTO;
 import com.avaliacaods.bank.dtos.LimitDTO;
+import com.avaliacaods.bank.dtos.TransferenceDTO;
 import com.avaliacaods.bank.services.AccountsService;
 
 @RestController
@@ -30,6 +31,11 @@ public class AccountsController {
     @GetMapping("")
     public ResponseEntity<List<ContaDTO>> getUserAccounts() {
         return ResponseEntity.ok(this.accountsService.getUserAccounts());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ContaDTO>> getAllAccounts() {
+        return ResponseEntity.ok(this.accountsService.getAllAccounts());
     }
 
     @PostMapping("")
@@ -56,4 +62,11 @@ public class AccountsController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/transference")
+    public ResponseEntity<Void> transference(@RequestBody TransferenceDTO transferenceDTO) {
+
+        this.accountsService.transference(transferenceDTO);
+        
+        return ResponseEntity.ok().build();
+    }
 }

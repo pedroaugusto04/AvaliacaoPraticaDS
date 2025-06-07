@@ -6,6 +6,7 @@ import { SaqueComponent } from './components/saque/saque.component';
 import { DepositoComponent } from './components/deposito/deposito.component';
 import { ExtratoComponent } from './components/extrato/extrato.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
+import { TransferenciaComponent } from './components/transferencia/transferencia.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path: 'saque',component: SaqueComponent},
     {path: 'deposito',component: DepositoComponent},
     {path: 'extrato',component: ExtratoComponent},
-    {path: 'cliente',component: ClienteComponent}
+    {path: 'cliente',component: ClienteComponent},
+    {path: 'transferencia',component: TransferenciaComponent}
 ];

@@ -52,7 +52,7 @@ public class DepositsService {
 
         if (saldoAllAccounts.compareTo(new BigDecimal(depositDTO.getValor())) < 0) {
 
-            Double bonus = (double)10/100 * Double.parseDouble(depositDTO.getValor());
+            Double bonus = (double)10/(double)100 * Double.parseDouble(depositDTO.getValor());
 
             LancamentoDTO lancamentoDTO = new LancamentoDTO(depositDTO.getNumeroConta(),String.valueOf(bonus),
             depositDTO.getTipoLancamento(), TipoOperacao.BONUS);

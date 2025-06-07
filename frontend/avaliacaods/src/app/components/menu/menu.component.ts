@@ -35,6 +35,10 @@ export class MenuComponent {
     this.router.navigate(['/extrato'])
   }
 
+  goToTransference() {
+    this.router.navigate(['/transferencia'])
+  }
+
   logout(){
     this.authenticationService.logoutUser();
   }
