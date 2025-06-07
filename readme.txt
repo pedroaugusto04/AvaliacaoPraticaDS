@@ -9,6 +9,8 @@ export $(cat .env | xargs) -> Carrega as variaveis de ambiente ( ou coloque hard
 
 3 - execute mvn spring-boot:run 
 
+****** Para criação inicial do banco, DDL_MODE na pasta.env deve ser DDL_MODE="create". Para persistencia, DDL_MODE="update"
+
 
 (O banco mysql deve estar rodando em localhost:3306 com o nome db_bank, user = root e password = root ( ou conforme DB_URL))
 
