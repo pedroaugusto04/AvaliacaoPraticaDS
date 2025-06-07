@@ -37,9 +37,9 @@ public class BankStatementsService {
     }
 
 
-    public BigDecimal getSaldoAllAccounts() {
+    public BigDecimal getSaldoAllClientAccounts(Long clienteId) {
         
-        List<Conta> accounts = this.accountsRepository.findAll();
+        List<Conta> accounts = this.accountsRepository.findByClienteId(clienteId);
 
         BigDecimal sum = new BigDecimal(0);
 

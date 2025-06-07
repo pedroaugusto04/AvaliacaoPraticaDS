@@ -48,8 +48,8 @@ public class DepositsService {
 
     public void verifyDepositBonus(LancamentoDTO depositDTO, Conta account) {
 
-        BigDecimal saldoAllAccounts = this.bankStatementService.getSaldoAllAccounts();
-
+        BigDecimal saldoAllAccounts = this.bankStatementService.getSaldoAllClientAccounts(account.getCliente().getId());
+        
         if (saldoAllAccounts.compareTo(new BigDecimal(depositDTO.getValor())) < 0) {
 
             Double bonus = (double)10/(double)100 * Double.parseDouble(depositDTO.getValor());
