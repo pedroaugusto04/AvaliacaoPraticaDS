@@ -39,10 +39,15 @@ public class WithdrawalService {
         })
         .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        // soma o saldo com o limite de credito da conta
+        saldo = saldo.add(new BigDecimal(conta.getLimiteCredito()));
+
         BigDecimal valor = new BigDecimal(withdrawalDTO.getValor());
 
+        // soma o valor com o limite de credito da conta
+
         if (valor.compareTo(saldo) > 0){
-            throw new InvalidTransactionException("Transação inválida","O saldo atual é menor do que a tentativa de saque");
+            throw new InvalidTransactionException("Transação inválida","O saldo atual somado com o limite de cŕedito é menor do que a tentativa de saque");
         }
 
         withdrawalDTO.setTipoLancamento(TipoLancamento.DEBITO);
